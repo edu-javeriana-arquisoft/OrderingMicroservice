@@ -11,12 +11,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    public Long customerId;
+    private String productName;
     private String description;
     private double price;
+    private double latitude = 0;
+    private double longitude = 0;
 
 }

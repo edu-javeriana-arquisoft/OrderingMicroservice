@@ -1,6 +1,6 @@
 package com.example.orderingmicroservice.controller;
 
-import com.example.orderingmicroservice.model.Order;
+import com.example.orderingmicroservice.model.Orders;
 import com.example.orderingmicroservice.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,20 +17,20 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
+    public ResponseEntity<List<Orders>> getAllOrders() {
+        List<Orders> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Order createdOrder = orderService.createOrder(order);
+    public ResponseEntity<Orders> createOrder(@RequestBody Orders order) {
+        Orders createdOrder = orderService.createOrder(order);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Order>> getOrderById(@PathVariable Long id) {
-        Optional<Order> order = orderService.getOrderById(id);
+    public ResponseEntity<Optional<Orders>> getOrderById(@PathVariable Long id) {
+        Optional<Orders> order = orderService.getOrderById(id);
         if (order != null) {
             return new ResponseEntity<>(order, HttpStatus.OK);
         } else {
@@ -39,8 +39,8 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<Order>> getOrdersByCustomerId(@PathVariable Long customerId){
-        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
+    public ResponseEntity<List<Orders>> getOrdersByCustomerId(@PathVariable Long customerId){
+        List<Orders> orders = orderService.getOrdersByCustomerId(customerId);
         if (orders != null) {
             return new ResponseEntity<>(orders, HttpStatus.OK);
         } else {

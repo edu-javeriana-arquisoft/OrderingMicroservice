@@ -16,6 +16,8 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long customerId;
+    private String productName;
+    private String productDescription;
     private double latitude;
     private double longitude;
 }

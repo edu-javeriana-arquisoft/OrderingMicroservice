@@ -2,9 +2,20 @@ version: '3.9'
 
 services:
   payments-microservice:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ordering_microservice_image
     ports:
       - "8073:8080"
       - "8095:8095"
+
+    deploy:
+      replicas: 5
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+networks:
+  default:
+    external:
+      name: overlay-network-eureka
+

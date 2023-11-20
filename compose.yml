@@ -2,20 +2,32 @@ version: '3.9'
 
 services:
   payments-microservice:
-    image: ordering_microservice_image
+    image: payment_microservice_image
     ports:
-      - "8073:8080"
-      - "8095:8095"
+      - "8072:8080"
 
     deploy:
-      replicas: 5
+      replicas: 3
       update_config:
         parallelism: 2
         delay: 10s
       restart_policy:
         condition: on-failure
+
+  ordering-microservice:
+    image: ordering_microservice_image
+    ports:
+      - "8073:8080"
+
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
 networks:
-  default:
-    external:
-      name: overlay-network-eureka
+  overlay-network-eureka:
+    external: true
 

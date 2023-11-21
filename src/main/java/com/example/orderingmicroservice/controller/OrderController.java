@@ -1,7 +1,9 @@
 package com.example.orderingmicroservice.controller;
 
+import com.example.orderingmicroservice.DTOs.OrderDTO;
 import com.example.orderingmicroservice.model.Orders;
 import com.example.orderingmicroservice.service.OrderService;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Orders> createOrder(@RequestBody Orders order) {
+    public ResponseEntity<Orders> createOrder(@RequestBody OrderDTO order) {
         Orders createdOrder = orderService.createOrder(order);
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }

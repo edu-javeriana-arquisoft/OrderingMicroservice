@@ -18,7 +18,18 @@ services:
     image: ordering_microservice_image
     ports:
       - "8073:8080"
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
 
+  customer-micrroservice:
+    image: customer_microservice_image
+    ports:
+      - "8071:8080"
     deploy:
       replicas: 3
       update_config:
